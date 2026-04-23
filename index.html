@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catcher — Ireland's AI That Fights Your Overcharges</title>
-<meta name="description" content="Catcher connects to your bank, finds where you're being overcharged, writes AI-powered negotiation letters citing Irish consumer law, and only charges when you save.">
+<meta name="description" content="Catcher connects to your bank, finds where you're being overcharged, writes AI-powered letters citing Irish consumer law, and only charges when you save.">
 <meta property="og:title" content="Catcher — Stop Overpaying. Start Catching.">
 <meta property="og:description" content="Ireland's first AI financial advocacy app. Find overcharges. Fight back. Save money.">
 <meta property="og:type" content="website">
@@ -41,13 +41,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Stars */
-.stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-.star {
-  position: absolute; border-radius: 50%; background: white;
-  animation: twinkle var(--dur) ease-in-out infinite alternate;
-}
-@keyframes twinkle { 0% { opacity: var(--min-o); } 100% { opacity: var(--max-o); } }
+/* Constellation */
+.constellation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.constellation canvas { width: 100%; height: 100%; }
 
 /* Layout */
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
@@ -62,7 +58,8 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 nav .inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: var(--serif); font-size: 26px; color: var(--text); text-decoration: none; letter-spacing: -0.5px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo img { height: 32px; width: auto; }
 .logo span { color: var(--green); }
 nav a.nav-link { color: var(--text-mid); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
 nav a.nav-link:hover { color: var(--text); }
@@ -115,16 +112,8 @@ nav a.nav-link:hover { color: var(--text); }
 .trust-line { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .trust-line span { display: flex; align-items: center; gap: 5px; }
 .trust-line svg { width: 14px; height: 14px; }
-
-/* Stats bar */
-.stats-bar {
-  margin-top: 64px; padding: 20px 32px; border-radius: 16px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap;
-}
-.stat { text-align: center; }
-.stat-num { font-family: var(--serif); font-size: 32px; color: var(--green); letter-spacing: -1px; }
-.stat-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hero-source { font-size: 11px; color: var(--text-dim); margin-top: 12px; }
+.hero-source a { color: var(--text-dim); text-decoration: underline; }
 
 /* Section headers */
 .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); font-weight: 600; margin-bottom: 12px; }
@@ -195,7 +184,8 @@ nav a.nav-link:hover { color: var(--text); }
 }
 .model-card h3 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
 .model-price { font-family: var(--serif); font-size: 42px; color: var(--green); margin: 16px 0 4px; letter-spacing: -1px; }
-.model-price-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
+.model-price-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+.model-price-alt { font-size: 12px; color: var(--text-dim); margin-bottom: 20px; font-style: italic; }
 .model-features { list-style: none; text-align: left; }
 .model-features li {
   padding: 8px 0; font-size: 14px; color: var(--text-mid);
@@ -225,7 +215,7 @@ nav a.nav-link:hover { color: var(--text); }
 .faq-q .arrow { color: var(--text-dim); transition: transform 0.3s; font-size: 18px; }
 .faq-item.open .arrow { transform: rotate(180deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; font-size: 14px; color: var(--text-mid); line-height: 1.7; }
-.faq-item.open .faq-a { max-height: 200px; }
+.faq-item.open .faq-a { max-height: 300px; }
 .faq-a-inner { padding: 0 0 20px; }
 
 /* Final CTA */
@@ -241,6 +231,29 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: cente
 footer a { color: var(--text-dim); text-decoration: none; }
 footer a:hover { color: var(--text); }
 .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
+.footer-legal { font-size: 11px; color: var(--text-dim); margin-top: 12px; line-height: 1.7; }
+
+/* Cookie banner */
+.cookie-banner {
+  position: fixed; bottom: 20px; left: 20px; right: 20px;
+  max-width: 580px; margin: 0 auto;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.cookie-banner p { font-size: 13px; color: var(--text-mid); flex: 1; min-width: 240px; line-height: 1.6; }
+.cookie-banner a { color: var(--green); text-decoration: underline; }
+.cookie-buttons { display: flex; gap: 8px; }
+.cookie-btn {
+  padding: 8px 16px; border-radius: 8px; border: none;
+  font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.cookie-btn.accept { background: var(--green); color: var(--bg); }
+.cookie-btn.decline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+.cookie-btn:hover { opacity: 0.85; }
+.cookie-banner.hidden { display: none; }
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -250,12 +263,10 @@ footer a:hover { color: var(--text); }
   .security-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-form { flex-direction: column; }
   .nav-links .nav-link:not(.nav-cta) { display: none; }
-  .stats-bar { gap: 24px; padding: 20px; }
   section { padding: 72px 0; }
 }
 @media (max-width: 480px) {
   .security-grid { grid-template-columns: 1fr; }
-  .stats-bar { flex-direction: column; }
 }
 
 /* Animations */
@@ -265,17 +276,17 @@ footer a:hover { color: var(--text); }
 </head>
 <body>
 
-<div class="stars" id="stars"></div>
+<div class="constellation"><canvas id="constellation"></canvas></div>
 
 <!-- Nav -->
 <nav>
   <div class="inner">
-    <a href="#" class="logo">catcher<span>.</span></a>
+    <a href="#" class="logo"><img src="logo.png" alt="Catcher"></a>
     <div class="nav-links">
       <a href="#how" class="nav-link">How It Works</a>
       <a href="#features" class="nav-link">Features</a>
       <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#privacy" class="nav-link">Your Data</a>
       <a href="#waitlist" class="nav-link nav-cta">Join Waitlist</a>
     </div>
   </div>
@@ -284,15 +295,16 @@ footer a:hover { color: var(--text); }
 <!-- Hero -->
 <section class="hero">
   <div class="container">
+    <img src="logo.png" alt="Catcher" style="height:48px;width:auto;margin-bottom:24px;" class="fade-up">
     <div class="hero-badge fade-up"><span class="dot"></span> Coming Soon — Ireland Only</div>
-    <h1 class="fade-up" style="transition-delay:0.1s">Irish companies overcharge you <em>€800 a year.</em> Catcher finds it.</h1>
+    <h1 class="fade-up" style="transition-delay:0.1s">Most Irish households are <em>overpaying somewhere.</em> Catcher finds where.</h1>
     <p class="hero-sub fade-up" style="transition-delay:0.2s">
       Connect your bank. Catcher's AI scans your transactions, spots overcharges,
-      writes negotiation letters citing Irish consumer law, tracks your claims,
+      writes letters citing Irish consumer law, tracks your claims,
       and only charges when you actually save.
     </p>
     <form class="hero-form fade-up" style="transition-delay:0.3s" id="waitlist" onsubmit="handleSubmit(event)">
-      <input type="email" placeholder="your@email.ie" required>
+      <input type="email" name="email" placeholder="your@email.ie" required>
       <button type="submit">Join the Waitlist</button>
     </form>
     <div class="trust-line fade-up" style="transition-delay:0.4s">
@@ -302,11 +314,11 @@ footer a:hover { color: var(--text); }
       </span>
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        AES-256 encryption
+        GDPR compliant
       </span>
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Central Bank regulated
+        EU data only
       </span>
     </div>
   </div>
@@ -323,19 +335,19 @@ footer a:hover { color: var(--text); }
         <div class="step-num">1</div>
         <div class="step-icon" style="background:var(--green-glow);color:var(--green);">🏦</div>
         <h3>Connect your bank</h3>
-        <p>Open Banking — regulated by the Central Bank of Ireland. Read-only access. We can never move your money.</p>
+        <p>Secure Open Banking connection via TrueLayer, a regulated provider under PSD2. Read-only access. We can never move your money.</p>
       </div>
       <div class="step fade-up" style="transition-delay:0.1s">
         <div class="step-num">2</div>
         <div class="step-icon" style="background:var(--accent-glow);color:var(--accent);">🔍</div>
         <h3>Catcher spots the problems</h3>
-        <p>Insurance loyalty penalties, forgotten subscriptions, duplicate charges, hidden fees, price increases — found in seconds.</p>
+        <p>Insurance renewal hikes, forgotten subscriptions, duplicate charges, hidden fees, price increases — found in seconds.</p>
       </div>
       <div class="step fade-up" style="transition-delay:0.2s">
         <div class="step-num">3</div>
         <div class="step-icon" style="background:rgba(251,146,60,0.1);color:var(--orange);">✉️</div>
         <h3>One tap to fight back</h3>
-        <p>Catcher writes the letter, cites the law, names the regulator, pre-fills the provider's email. You review and send.</p>
+        <p>Catcher drafts the letter, cites the law, names the regulator, pre-fills the provider's email. You review and send.</p>
       </div>
     </div>
   </div>
@@ -346,16 +358,16 @@ footer a:hover { color: var(--text); }
   <div class="container">
     <div class="section-label fade-up">What Catcher Catches</div>
     <div class="section-title fade-up">The overcharges hiding<br>in your bank account</div>
-    <p class="section-sub fade-up">Every month, Irish consumers lose money to loyalty penalties, billing errors, and forgotten subscriptions.</p>
+    <p class="section-sub fade-up">Irish consumers lose money every month to renewal hikes, billing errors, and forgotten subscriptions.</p>
     <div class="features-grid">
       <div class="feature-card fade-up">
         <div class="feature-header">
           <div class="feature-icon" style="background:rgba(248,113,113,0.1);color:var(--red);">🚗</div>
           <span class="feature-tag" style="background:rgba(248,113,113,0.1);color:var(--red);">Highest Value</span>
         </div>
-        <h4>Insurance Loyalty Penalties</h4>
-        <p>The average Irish car insurance renewal is 34% higher than a new customer quote. Catcher detects the increase and generates a negotiation letter for car, home, health, pet, travel, and life insurance.</p>
-        <div class="feature-example">"Your AXA car insurance went up to €843. Three competitors quoted €560–€620. Here's your letter citing Central Bank guidelines."</div>
+        <h4>Insurance Renewal Overpricing</h4>
+        <p>Car, home, health, pet, travel and life insurance renewals often come in higher than new-customer quotes. Catcher spots the jump and drafts a negotiation letter with competitor rates.</p>
+        <div class="feature-example">"Your car insurance renewal came in at €843. Three competitors quoted €560–620. Here's your negotiation letter."</div>
       </div>
       <div class="feature-card fade-up" style="transition-delay:0.1s">
         <div class="feature-header">
@@ -371,16 +383,16 @@ footer a:hover { color: var(--text); }
           <div class="feature-icon" style="background:rgba(56,189,248,0.1);color:var(--accent);">💸</div>
         </div>
         <h4>Duplicate Charges</h4>
-        <p>Billing errors happen more than you'd think. Catcher spots when you've been charged twice and writes your refund request with the provider's email pre-filled.</p>
-        <div class="feature-example">"Bord Gáis charged you €127.40 twice in March. Here's your refund letter."</div>
+        <p>Card-based duplicate charges from restaurants, retail, and online purchases happen more than you'd think. Catcher spots them and drafts your refund request.</p>
+        <div class="feature-example">"You were charged €47.80 twice by the same merchant on March 14th. Here's your refund letter."</div>
       </div>
       <div class="feature-card fade-up" style="transition-delay:0.1s">
         <div class="feature-header">
           <div class="feature-icon" style="background:rgba(52,211,153,0.1);color:var(--green);">📈</div>
         </div>
         <h4>Price Increases</h4>
-        <p>When a provider raises your price without proper notice, Catcher catches it and writes a complaint citing the relevant regulator — CRU for energy, ComReg for telecoms, CCPC for consumer rights.</p>
-        <div class="feature-example">"Vodafone increased your bill by €5/month. Here's your complaint to ComReg."</div>
+        <p>When a provider raises your price without proper notice, Catcher catches it and drafts a complaint citing the relevant regulator — CRU for energy, ComReg for telecoms, CCPC for consumer rights.</p>
+        <div class="feature-example">"Your mobile bill went up €5/month. Here's your complaint draft to ComReg."</div>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-header">
@@ -388,8 +400,8 @@ footer a:hover { color: var(--text); }
           <span class="feature-tag" style="background:rgba(52,211,153,0.1);color:var(--green);">Day 1 Finding</span>
         </div>
         <h4>Hidden Installment Interest</h4>
-        <p>Paying insurance in monthly installments? You're likely paying 15–25% APR in hidden interest. Catcher spots this and shows you cheaper financing options like credit union loans.</p>
-        <div class="feature-example">"Your monthly insurance payments include €180/year in hidden interest. A credit union loan at 3% saves you €140."</div>
+        <p>Paying insurance in monthly installments typically adds 15–25% in hidden interest. Catcher spots this and shows you cheaper financing alternatives like credit union loans.</p>
+        <div class="feature-example">"Your monthly insurance payments include an estimated €180/year in hidden interest. A credit union loan at 3% could save you €140."</div>
       </div>
       <div class="feature-card fade-up" style="transition-delay:0.1s">
         <div class="feature-header">
@@ -397,7 +409,25 @@ footer a:hover { color: var(--text); }
         </div>
         <h4>Free Trial Traps</h4>
         <p>That "free trial" just became a paid subscription. Catcher catches the first charge and gives you instant cancellation steps before the next billing cycle.</p>
-        <div class="feature-example">"Disney+ just charged you €10.99 — your free trial ended yesterday. Cancel now?"</div>
+        <div class="feature-example">"A streaming service just charged you €9.99 — your free trial ended yesterday. Cancel now?"</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-header">
+          <div class="feature-icon" style="background:rgba(56,189,248,0.1);color:var(--accent);">✈️</div>
+          <span class="feature-tag" style="background:rgba(56,189,248,0.1);color:var(--accent);">EU261</span>
+        </div>
+        <h4>Flight Delay Compensation</h4>
+        <p>Catcher scans your bank for airline purchases, checks if your flight was delayed 3+ hours, and drafts an EU261 claim letter. Up to €600 per passenger — no claims company taking a large cut.</p>
+        <div class="feature-example">"Your flight on 12 March was delayed 4hrs. You may be owed €250 per passenger under EU261. Here's your claim letter."</div>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.1s">
+        <div class="feature-header">
+          <div class="feature-icon" style="background:rgba(52,211,153,0.1);color:var(--green);">📋</div>
+          <span class="feature-tag" style="background:rgba(52,211,153,0.1);color:var(--green);">End-to-End</span>
+        </div>
+        <h4>Claim Tracking & Escalation</h4>
+        <p>Catcher doesn't just draft the letter — it tracks every claim from send to resolution. Follow-up letters at day 7, counter-offer responses, and escalation drafts for Irish regulators (FSPO, CRU, ComReg, CCPC) if companies don't respond.</p>
+        <div class="feature-example">"Day 7 of 10. No response yet. Catcher drafted a follow-up letter."</div>
       </div>
     </div>
   </div>
@@ -408,22 +438,37 @@ footer a:hover { color: var(--text); }
   <div class="container">
     <div class="section-label fade-up">Beyond Catching</div>
     <div class="section-title fade-up">Smart Money tools<br>that work for you daily</div>
-    <p class="section-sub fade-up">Catcher isn't just for overcharges. It helps you understand, control, and grow your money every day.</p>
+    <p class="section-sub fade-up">Catcher isn't just for overcharges. It helps you understand and control your money every day.</p>
     <div class="smart-grid">
       <div class="smart-card fade-up">
         <div class="smart-icon">📊</div>
         <h4>Spending Radar</h4>
-        <p>See exactly where your money goes with visual category breakdowns, month-over-month trends, and auto-detected spending anomalies.</p>
+        <p>Visual category breakdowns, month-over-month trends, top merchants, and auto-detected spending anomalies. Know where every euro goes.</p>
       </div>
       <div class="smart-card fade-up" style="transition-delay:0.1s">
         <div class="smart-icon">🎯</div>
         <h4>Spending Targets</h4>
-        <p>Set targets per category, linked to your savings goals. Catcher alerts you at 80% and 100% — coaching, not policing.</p>
+        <p>Set per-category targets linked to your savings goals. Catcher alerts you at 80% and 100% — coaching, not policing. Stay on track without the guilt.</p>
       </div>
       <div class="smart-card fade-up" style="transition-delay:0.2s">
         <div class="smart-icon">✈️</div>
-        <h4>Savings Goals + AI Planning</h4>
-        <p>Saving for a holiday? Catcher builds a plan with flight costs, money tips, and itineraries — all from Dublin, all priced in euros.</p>
+        <h4>AI Holiday Planning</h4>
+        <p>Saving for a trip? Catcher helps you plan — flight costs from Dublin, cheaper routing ideas, money tips for your destination, and day-by-day itineraries.</p>
+      </div>
+      <div class="smart-card fade-up">
+        <div class="smart-icon">🏆</div>
+        <h4>Competitor Intelligence</h4>
+        <p>When Catcher finds an overcharge, it shows you real competitor rates. Compare insurance quotes, see cheaper subscription alternatives, switch with confidence.</p>
+      </div>
+      <div class="smart-card fade-up" style="transition-delay:0.1s">
+        <div class="smart-icon">💰</div>
+        <h4>Savings Goal Tracking</h4>
+        <p>Tag bank transfers as savings, set up auto-rules, and watch your goal progress ring fill up. Catcher connects your spending targets to your goals so every euro counts.</p>
+      </div>
+      <div class="smart-card fade-up" style="transition-delay:0.2s">
+        <div class="smart-icon">📅</div>
+        <h4>Money Calendar</h4>
+        <p>See every upcoming charge before it hits. Subscriptions, direct debits, predicted expenses — know what's coming and plan ahead.</p>
       </div>
     </div>
   </div>
@@ -434,64 +479,127 @@ footer a:hover { color: var(--text); }
   <div class="container">
     <div class="section-label fade-up">Pricing</div>
     <div class="section-title fade-up">You only pay when<br>Catcher saves you money</div>
-    <p class="section-sub fade-up" style="margin:0 auto;">No subscription required. No upfront cost. Savings verified through your bank data — not self-reporting.</p>
+    <p class="section-sub fade-up" style="margin:0 auto;">Savings confirmed through your bank data — not self-reporting.</p>
     <div class="model-cards">
       <div class="model-card free fade-up">
         <h3>Free</h3>
         <div class="model-price">€0</div>
-        <div class="model-price-sub">forever free to start</div>
+        <div class="model-price-sub">pay only when you save</div>
         <ul class="model-features">
           <li><span class="check">✓</span> All overcharge detection</li>
-          <li><span class="check">✓</span> AI negotiation letters</li>
+          <li><span class="check">✓</span> AI-drafted letters</li>
           <li><span class="check">✓</span> Claim tracking</li>
           <li><span class="check">✓</span> Spending radar & targets</li>
-          <li><span class="check">✓</span> 20% of verified savings</li>
+          <li><span class="check">✓</span> 20% success fee on confirmed savings</li>
         </ul>
       </div>
       <div class="model-card pro fade-up" style="transition-delay:0.1s">
         <h3>Pro</h3>
-        <div class="model-price">€4.99</div>
+        <div class="model-price">€7.99</div>
         <div class="model-price-sub">per month</div>
+        <div class="model-price-alt">or €69.99/year — 2 months free</div>
         <ul class="model-features">
           <li><span class="check">✓</span> Everything in Free</li>
-          <li><span class="check">✓</span> Only 10% of verified savings</li>
-          <li><span class="check">✓</span> Priority claim processing</li>
-          <li><span class="check">✓</span> Holiday price agent</li>
-          <li><span class="check">✓</span> Annual financial report</li>
+          <li><span class="check">✓</span> Only 10% success fee</li>
+          <li><span class="check">✓</span> 12-month retroactive scan</li>
+          <li><span class="check">✓</span> Multi-account support</li>
+          <li><span class="check">✓</span> Automated escalation ladder</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Security -->
-<section>
+<!-- Security & Privacy -->
+<section id="privacy">
   <div class="container">
     <div style="text-align:center;">
-      <div class="section-label fade-up">Security</div>
-      <div class="section-title fade-up">Your data is sacred</div>
-      <p class="section-sub fade-up" style="margin:0 auto;">Bank-grade security from day one. Not bolted on after.</p>
+      <div class="section-label fade-up">Your Data</div>
+      <div class="section-title fade-up">We built Catcher for<br>people who ask "is it safe?"</div>
+      <p class="section-sub fade-up" style="margin:0 auto;">The number one question we get. Here's the full, honest answer — not marketing speak.</p>
     </div>
     <div class="security-grid">
       <div class="sec-item fade-up">
         <div class="sec-icon">🔐</div>
         <h4>Read-Only Access</h4>
-        <p>Catcher can see transactions but can never move money, make payments, or modify your account.</p>
+        <p>Catcher can see transactions but can <strong>never</strong> move money, make payments, set up direct debits, or modify your account in any way.</p>
       </div>
       <div class="sec-item fade-up" style="transition-delay:0.1s">
         <div class="sec-icon">🛡️</div>
-        <h4>AES-256 Encryption</h4>
-        <p>Same encryption used by banks and governments. Data encrypted at rest and in transit.</p>
+        <h4>AES-256-GCM Encryption</h4>
+        <p>Your data is encrypted at rest and in transit — the same standard used by banks and governments. Access is restricted to Catcher systems only.</p>
       </div>
       <div class="sec-item fade-up" style="transition-delay:0.2s">
         <div class="sec-icon">🇪🇺</div>
         <h4>EU Data Only</h4>
-        <p>Your data stays in the EU. GDPR compliant. Registered with the Irish Data Protection Commission.</p>
+        <p>Your data never leaves the European Union. Processed under GDPR. Hosted on EU servers.</p>
       </div>
       <div class="sec-item fade-up" style="transition-delay:0.3s">
         <div class="sec-icon">🏛️</div>
         <h4>Regulated Provider</h4>
-        <p>Bank connection via TrueLayer — Central Bank of Ireland regulated Account Information Service Provider.</p>
+        <p>Bank connection via TrueLayer — an FCA-authorised Account Information Service Provider operating in Ireland under PSD2.</p>
+      </div>
+    </div>
+
+    <!-- Detailed Privacy Section -->
+    <div style="max-width:760px;margin:48px auto 0;">
+      <div class="feature-card fade-up" style="border-left:3px solid var(--green);">
+        <h4 style="color:var(--green);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">How Your Data Flows</h4>
+        <div style="font-size:14px;color:var(--text-mid);line-height:1.8;">
+          <p style="margin-bottom:12px;"><strong style="color:var(--text);">1. You connect your bank.</strong> Catcher redirects you to your bank's own login page via TrueLayer. We never see your username or password — your bank authenticates you directly.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--text);">2. Catcher reads your transactions.</strong> Read-only. We receive transaction descriptions, amounts, and dates. We cannot see your full account number or initiate any payments.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--text);">3. AI classifies your spending.</strong> Transactions are categorised by our AI (large language model technology). Your data is pseudonymised before analysis — no name, address, or account details are sent to the AI.</p>
+          <p style="margin-bottom:12px;"><strong style="color:var(--text);">4. Letters are drafted for you.</strong> Negotiation letters are drafted using your transaction data. Sensitive personal information is never included unless you add it yourself before sending.</p>
+          <p style="margin-bottom:0;"><strong style="color:var(--text);">5. You're always in control.</strong> You review every letter before it's sent. You choose what to action. You can disconnect your bank and delete all data at any time — one tap, everything gone.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;">
+        <div class="feature-card fade-up">
+          <h4 style="margin-bottom:12px;">What We <span style="color:var(--green);">Do</span> Store</h4>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.8;">
+            <p>✓ Transaction descriptions and amounts</p>
+            <p>✓ Classified spending categories</p>
+            <p>✓ Findings and generated letters</p>
+            <p>✓ Your savings goals and targets</p>
+            <p>✓ Consent records with timestamps</p>
+          </div>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay:0.1s">
+          <h4 style="margin-bottom:12px;">What We <span style="color:var(--red);">Never</span> Store</h4>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.8;">
+            <p>✗ Your bank login credentials</p>
+            <p>✗ Your full account or sort code numbers</p>
+            <p>✗ Your PPS number or government ID</p>
+            <p>✗ Biometric data of any kind</p>
+            <p>✗ Data from people you transact with</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card fade-up" style="margin-top:24px;border-left:3px solid var(--accent);">
+        <h4 style="color:var(--accent);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Your GDPR Rights — Exercisable In-App</h4>
+        <div style="font-size:14px;color:var(--text-mid);line-height:1.8;">
+          <p style="margin-bottom:8px;"><strong style="color:var(--text);">Right to access:</strong> See exactly what data we hold about you, in plain language — not buried in a privacy policy.</p>
+          <p style="margin-bottom:8px;"><strong style="color:var(--text);">Right to portability:</strong> Download all your data as a JSON file with one tap. Take it anywhere.</p>
+          <p style="margin-bottom:8px;"><strong style="color:var(--text);">Right to erasure:</strong> Delete your account and all associated data permanently. We disconnect your bank, revoke all access tokens, and remove everything from our servers.</p>
+          <p style="margin-bottom:8px;"><strong style="color:var(--text);">Right to withdraw consent:</strong> You gave consent to connect your bank — you can revoke it at any time from your account settings.</p>
+          <p style="margin-bottom:0;"><strong style="color:var(--text);">Right to complain:</strong> If you're unhappy with how we handle your data, you can contact the Data Protection Commission at <a href="https://dataprotection.ie" style="color:var(--green);">dataprotection.ie</a>.</p>
+        </div>
+      </div>
+
+      <div class="feature-card fade-up" style="margin-top:24px;background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.15);">
+        <div style="text-align:center;font-size:15px;color:var(--text);line-height:1.7;">
+          <p style="margin-bottom:8px;"><strong>Third-party data processors:</strong></p>
+          <p style="font-size:13px;color:var(--text-mid);">
+            <strong>TrueLayer</strong> (bank connection — FCA-authorised AISP, PSD2) ·
+            <strong>Supabase</strong> (database — EU hosted, SOC2 certified) ·
+            <strong>Anthropic</strong> (AI classification — data pseudonymised) ·
+            <strong>Stripe</strong> (payments — PCI DSS compliant) ·
+            <strong>Sentry</strong> (error monitoring — PII scrubbed)
+          </p>
+          <p style="font-size:13px;color:var(--text-mid);margin-top:8px;">Data Processing Agreements in place with all providers. Full details in our <a href="/privacy" style="color:var(--green);">Privacy Policy</a>.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -507,7 +615,7 @@ footer a:hover { color: var(--text); }
     <div class="faq-list">
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
         <div class="faq-q">Is my bank data safe? <span class="arrow">▾</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Catcher connects via TrueLayer, a regulated Account Information Service Provider authorised by the Central Bank of Ireland. We only have read-only access — we can never move money. We never see or store your login credentials. All data is encrypted with AES-256-GCM and stored in the EU.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Catcher connects via TrueLayer, an FCA-authorised Account Information Service Provider operating in Ireland under PSD2. We only have read-only access — we can never move money. We never see or store your login credentials. All data is encrypted with AES-256-GCM and stored in the EU.</div></div>
       </div>
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
         <div class="faq-q">Which Irish banks are supported? <span class="arrow">▾</span></div>
@@ -515,19 +623,31 @@ footer a:hover { color: var(--text); }
       </div>
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
         <div class="faq-q">How do the AI letters work? <span class="arrow">▾</span></div>
-        <div class="faq-a"><div class="faq-a-inner">When Catcher detects an overcharge, AI generates a professional letter citing specific Irish regulations — FSPO for insurance, CRU for energy, ComReg for telecoms. It includes real competitor quotes when available and pre-fills the provider's email. You review before sending. Always your name, always your control.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">When Catcher detects an overcharge, AI drafts a professional letter citing specific Irish regulators — FSPO for financial services, CRU for energy, ComReg for telecoms, CCPC for consumer rights. It includes competitor quotes when available and pre-fills the provider's email. You review before sending. Always your name, always your control.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Is Catcher a regulated financial service? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">No. Catcher is an information and advocacy tool, not a regulated financial advisor or credit intermediary. We don't provide financial advice, hold client money, or facilitate transactions. We provide tools and information to help you act on your own decisions. Your bank connection is provided by TrueLayer, which is regulated as an Account Information Service Provider.</div></div>
       </div>
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
         <div class="faq-q">When do I actually pay? <span class="arrow">▾</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Only after your bank data confirms the charge dropped. Not when you send the letter. Not when the company responds. Only when real money is saved in your actual bank account. If Catcher doesn't save you money, you pay nothing.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Only after your bank data confirms a charge has dropped. Not when you send a letter. Not when a company responds. Only when real money is saved in your actual bank account. If Catcher doesn't save you money, you pay nothing.</div></div>
       </div>
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
         <div class="faq-q">Can I delete my data? <span class="arrow">▾</span></div>
         <div class="faq-a"><div class="faq-a-inner">Yes, at any time. One tap removes everything — your account, transactions, findings, and letters. We disconnect from your bank immediately and revoke all access tokens. GDPR Article 17 — your right to erasure.</div></div>
       </div>
       <div class="faq-item fade-up" onclick="toggleFaq(this)">
-        <div class="faq-q">What about spending targets? <span class="arrow">▾</span></div>
-        <div class="faq-a"><div class="faq-a-inner">Catcher lets you set spending targets per category — linked to your savings goals. If you're saving for a holiday, Catcher shows you how staying under your dining target gets you there faster. Alerts at 80% and 100%, coaching tone, never guilt.</div></div>
+        <div class="faq-q">How does flight compensation work? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Catcher scans your bank transactions for airline purchases, then checks if those flights were delayed 3+ hours. Under EU Regulation 261/2004, you may be owed €250–€600 per passenger. Catcher drafts the claim letter with all flight details and legal references — no need for a claims company taking a large cut. Claims are generally valid for up to 6 years under Irish law.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Who sees my data? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Your data is processed by five services, each with a signed Data Processing Agreement: TrueLayer (bank connection), Supabase (database, EU hosted), Anthropic (AI classification — your data is pseudonymised first), Stripe (payments), and Sentry (error monitoring — all personal data scrubbed). We never sell your data. We never share it with advertisers. We never will.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">What happens if I disconnect? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">You can disconnect your bank at any time from the app. Catcher immediately revokes the TrueLayer access token — we lose all ability to read your transactions. Your existing findings and claims remain so you don't lose progress on active negotiations. To remove everything, tap "Delete my account" — all data is permanently erased within seconds.</div></div>
       </div>
     </div>
   </div>
@@ -536,10 +656,11 @@ footer a:hover { color: var(--text); }
 <!-- Final CTA -->
 <section class="final-cta">
   <div class="container">
+    <img src="logo.png" alt="Catcher" style="height:40px;width:auto;margin-bottom:20px;" class="fade-up">
     <h2 class="fade-up">Stop overpaying.<br>Start catching.</h2>
     <p class="fade-up">Join the waitlist. Be first to know when Catcher launches.</p>
     <form class="hero-form fade-up" onsubmit="handleSubmit(event)" style="max-width:440px;margin:0 auto;">
-      <input type="email" placeholder="your@email.ie" required>
+      <input type="email" name="email" placeholder="your@email.ie" required>
       <button type="submit">Join the Waitlist</button>
     </form>
   </div>
@@ -548,18 +669,108 @@ footer a:hover { color: var(--text); }
 <!-- Footer -->
 <footer>
   <div class="container">
+    <img src="logo.png" alt="Catcher" style="height:28px;width:auto;margin-bottom:16px;opacity:0.7;">
     <div class="footer-links">
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="mailto:hello@catcher.ie">Contact</a>
     </div>
     <p>Built in Ireland, for Irish consumers. © 2026 Catcher.</p>
+    <p class="footer-legal">
+      Catcher is a trading name of [Your Company Name Ltd], a company registered in Ireland — Company No. [CRO number].<br>
+      Registered office: [Your Registered Address]. Contact: hello@catcher.ie.<br>
+      Catcher is not a regulated financial advisor and does not provide financial advice.
+    </p>
   </div>
 </footer>
 
+<!-- Cookie banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <p>
+    We use essential cookies to make this site work. With your consent, we also use analytics cookies to understand how visitors use the site. See our <a href="/privacy">Privacy Policy</a>.
+  </p>
+  <div class="cookie-buttons">
+    <button class="cookie-btn decline" onclick="cookieConsent(false)">Essential only</button>
+    <button class="cookie-btn accept" onclick="cookieConsent(true)">Accept all</button>
+  </div>
+</div>
+
 <script>
-// Stars
-(function(){const c=document.getElementById('stars');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const size=Math.random()*2+0.5;s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--min-o:${0.1+Math.random()*0.2};--max-o:${0.4+Math.random()*0.5};`;c.appendChild(s);}})();
+// Constellation network effect
+(function(){
+  const canvas = document.getElementById('constellation');
+  const ctx = canvas.getContext('2d');
+  let w, h, points = [];
+  const COUNT = 60;
+  const MAX_DIST = 150;
+  const GREEN = [52, 211, 153];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < COUNT; i++) {
+    points.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.005 + Math.random() * 0.01
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    for (let p of points) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pulse += p.pulseSpeed;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+    }
+
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.strokeStyle = `rgba(${GREEN[0]},${GREEN[1]},${GREEN[2]},${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (let p of points) {
+      const glow = 0.3 + Math.sin(p.pulse) * 0.2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${GREEN[0]},${GREEN[1]},${GREEN[2]},${glow})`;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${GREEN[0]},${GREEN[1]},${GREEN[2]},${glow * 0.1})`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 // Scroll animations
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
@@ -568,18 +779,62 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 // FAQ
 function toggleFaq(el){const wasOpen=el.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)el.classList.add('open');}
 
-// Waitlist
-function handleSubmit(e){
+// Waitlist — submits to Formspree. Replace FORMSPREE_ID with your actual form ID.
+async function handleSubmit(e){
   e.preventDefault();
-  const input=e.target.querySelector('input');
-  const btn=e.target.querySelector('button');
-  btn.textContent='Joining...';btn.disabled=true;
-  // Replace with your Supabase endpoint
-  setTimeout(()=>{
-    btn.textContent="You're in! 🎉";btn.style.background='var(--green)';
-    input.value='';input.placeholder='Check your inbox';
-    setTimeout(()=>{btn.textContent='Join the Waitlist';btn.style.background='';btn.disabled=false;input.placeholder='your@email.ie';},4000);
-  },800);
+  const form = e.target;
+  const input = form.querySelector('input[type="email"]');
+  const btn = form.querySelector('button');
+  const email = input.value.trim();
+
+  if (!email) return;
+
+  btn.textContent = 'Joining...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('https://formspree.io/f/FORMSPREE_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: window.location.pathname })
+    });
+
+    if (response.ok) {
+      btn.textContent = "You're in! 🎉";
+      btn.style.background = 'var(--green)';
+      input.value = '';
+      input.placeholder = 'Check your inbox';
+      setTimeout(() => {
+        btn.textContent = 'Join the Waitlist';
+        btn.style.background = '';
+        btn.disabled = false;
+        input.placeholder = 'your@email.ie';
+      }, 4000);
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    btn.textContent = 'Try again';
+    btn.style.background = 'var(--red)';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = 'Join the Waitlist';
+      btn.style.background = '';
+    }, 3000);
+  }
+}
+
+// Cookie consent
+function cookieConsent(accepted) {
+  localStorage.setItem('catcher_cookie_consent', accepted ? 'accepted' : 'essential');
+  document.getElementById('cookieBanner').classList.add('hidden');
+  if (accepted) {
+    // Load analytics here (PostHog, etc.) when ready
+    // Example: posthog.init('your-key', { api_host: 'https://eu.i.posthog.com' });
+  }
+}
+if (localStorage.getItem('catcher_cookie_consent')) {
+  document.getElementById('cookieBanner').classList.add('hidden');
 }
 </script>
 </body>
