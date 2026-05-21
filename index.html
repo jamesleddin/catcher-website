@@ -168,6 +168,25 @@ nav a.nav-link:hover { color: var(--text); }
 .smart-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
 .smart-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
 .smart-phone { transform: rotate(2deg); }
+
+/* Smart Money detail gallery — 4-up row of phone screenshots beneath
+   the Smart Money feature grid. Inherits .showcase-phone styling for
+   the actual phone frame; .smart-gallery is just the grid + caption. */
+.smart-gallery { margin-top: 80px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.smart-gallery-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.smart-gallery-item .showcase-phone { max-width: 220px; transform: none; margin-bottom: 18px; }
+.smart-gallery-item h5 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.smart-gallery-item p { font-size: 12.5px; color: var(--text-mid); line-height: 1.55; }
+.smart-gallery-heading { text-align: center; margin-top: 80px; }
+.smart-gallery-heading h3 { font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.02em; }
+.smart-gallery-heading p { font-size: 15px; color: var(--text-mid); }
+@media (max-width: 900px) {
+  .smart-gallery { grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+}
+@media (max-width: 540px) {
+  .smart-gallery { grid-template-columns: 1fr; gap: 32px; }
+  .smart-gallery-item .showcase-phone { max-width: 240px; }
+}
 @media (max-width: 880px) {
   .smart-layout { grid-template-columns: 1fr; gap: 40px; }
   .smart-phone { max-width: 260px; transform: none; }
@@ -320,9 +339,9 @@ footer a:hover { color: var(--text); }
     </div>
     <div class="phone-frame hero-phone-stack fade-up" style="transition-delay:0.15s">
       <img src="home-savings.jpg" alt="Catcher home screen — €154.61 found" loading="eager">
-      <img src="subscription-review.jpg" alt="Catcher subscription review" loading="eager">
-      <img src="cancellation-guide.jpg" alt="Catcher cancellation tracker" loading="eager">
-      <img src="smart-money.jpg" alt="Catcher Smart Money" loading="eager">
+      <img src="savings-owed.jpg" alt="Catcher Savings — €544.26 owed back" loading="eager">
+      <img src="smart-money-spending.jpg" alt="Catcher Smart Money spending breakdown" loading="eager">
+      <img src="goals.jpg" alt="Catcher savings goals — Lisbon Trip progress" loading="eager">
     </div>
   </div>
 </section>
@@ -364,42 +383,72 @@ footer a:hover { color: var(--text); }
     </div>
 
     <div class="showcase-row fade-up">
-      <div class="showcase-phone"><img src="home-savings.jpg" alt="Catcher home screen" loading="lazy"></div>
+      <div class="showcase-phone"><img src="home-savings.jpg" alt="Catcher home screen — €154.61 found, in-progress claims" loading="lazy"></div>
       <div class="showcase-text">
         <span class="showcase-tag">Your home screen</span>
         <h3>See exactly <em>what you're owed</em>, the moment you open the app.</h3>
         <p>Catcher's home screen surfaces your total potential savings across every finding it has uncovered — from forgotten subscriptions to insurance overpricing. No dashboards to configure. No graphs to decode.</p>
-        <p class="showcase-detail">Catcher categorises every transaction by spend type, then flags the savings opportunities sitting in your bank data.</p>
+        <p class="showcase-detail">Categorised spending across the top, claims-in-progress tracked at the bottom. One screen, full picture.</p>
       </div>
     </div>
 
     <div class="showcase-row reverse fade-up">
-      <div class="showcase-phone"><img src="subscription-review.jpg" alt="Catcher subscription review screen" loading="lazy"></div>
+      <div class="showcase-phone"><img src="savings-owed.jpg" alt="Catcher Savings tab — €544.26 owed back across duplicates and subscriptions" loading="lazy"></div>
       <div class="showcase-text">
-        <span class="showcase-tag">Subscription review</span>
-        <h3>Subscription analysis with <em>real alternatives</em>, not just a list.</h3>
-        <p>When Catcher finds a recurring charge, it tells you what you're paying, what comparable services cost, and which Irish consumer protections apply. Built-in citations to CCPC, FSPO, CRU, and ComReg.</p>
-        <p class="showcase-detail">Every finding includes the actual monthly difference — so you can switch with confidence, not just curiosity.</p>
+        <span class="showcase-tag">What companies owe you</span>
+        <h3>Every overcharge in one place, <em>with the law on your side.</em></h3>
+        <p>The Savings tab groups every finding by type — duplicate charges, subscriptions to review, price increases, insurance hikes — with the exact euro figure Catcher can recover for you.</p>
+        <p class="showcase-detail">Built-in citations to CCPC, FSPO, CRU, and ComReg mean every claim has Irish consumer law behind it.</p>
       </div>
     </div>
 
     <div class="showcase-row fade-up">
-      <div class="showcase-phone"><img src="cancellation-guide.jpg" alt="Catcher cancellation guide" loading="lazy"></div>
+      <div class="showcase-phone"><img src="subscription-inventory.jpg" alt="Catcher subscription inventory — every recurring charge with monthly and yearly cost" loading="lazy"></div>
       <div class="showcase-text">
-        <span class="showcase-tag">Cancellation guide</span>
-        <h3>Step-by-step cancellation, <em>ready in seconds.</em></h3>
-        <p>Some providers don't take cancellation by email — so Catcher gives you the exact steps to follow on their site or app, plus a one-tap "Open" link that drops you straight onto the right page.</p>
-        <p class="showcase-detail">No more digging through help centres or chat bots designed to make you give up.</p>
+        <span class="showcase-tag">Subscription inventory</span>
+        <h3>Every recurring charge, <em>tracked forever.</em></h3>
+        <p>Catcher confirms every subscription on your bank and shows the real monthly and yearly cost — so you stop "guessing" what you spend on Netflix, Spotify, ChatGPT, your gym and the rest combined.</p>
+        <p class="showcase-detail">Tap any one to review or cancel. Even the ones you dismissed earlier stay on the list — nothing slips back into the background.</p>
       </div>
     </div>
 
     <div class="showcase-row reverse fade-up">
-      <div class="showcase-phone"><img src="smart-money.jpg" alt="Catcher Smart Money screen" loading="lazy"></div>
+      <div class="showcase-phone"><img src="finding-detail.jpg" alt="Catcher finding detail — Deliveroo duplicate charge with refund letter ready" loading="lazy"></div>
+      <div class="showcase-text">
+        <span class="showcase-tag">One tap to fight back</span>
+        <h3>Catcher drafts the letter. <em>You hit send.</em></h3>
+        <p>For every finding, Catcher prepares a complete claim — the merchant, the amount, the relevant law, the regulator. Duplicate charges become refund requests. Subscriptions become cancellations. Insurance hikes become renegotiations.</p>
+        <p class="showcase-detail">Question-led actions mean Catcher never assumes — you confirm, it acts.</p>
+      </div>
+    </div>
+
+    <div class="showcase-row fade-up">
+      <div class="showcase-phone"><img src="claims.jpg" alt="Catcher Claims tab — €544.26 being recovered, ready to claim and in progress" loading="lazy"></div>
+      <div class="showcase-text">
+        <span class="showcase-tag">Claims, tracked</span>
+        <h3>Watch every claim move <em>from "sent" to "settled."</em></h3>
+        <p>The Claims tab tracks every letter Catcher sent on your behalf. Ready to Claim, In Progress, Resolved — with day counters and follow-up reminders so nothing dies in a provider's inbox.</p>
+        <p class="showcase-detail">If a provider goes silent past their statutory window, Catcher escalates automatically.</p>
+      </div>
+    </div>
+
+    <div class="showcase-row reverse fade-up">
+      <div class="showcase-phone"><img src="smart-money-spending.jpg" alt="Catcher Smart Money spending breakdown — semi-circle donut and category grid" loading="lazy"></div>
       <div class="showcase-text">
         <span class="showcase-tag">Smart Money</span>
         <h3>Understand your spending <em>without the lectures.</em></h3>
-        <p>Smart Money shows where your money went this month, flags anything unusually high versus your typical pattern, and connects spending to your savings goals. Coaching, not policing.</p>
-        <p class="showcase-detail">Catcher spots anomalies automatically so you don't have to scroll through transactions wondering what changed.</p>
+        <p>Smart Money shows where your money went this month with a clean category donut and a side-by-side comparison to your typical pattern. Coaching, not policing — anomalies surface automatically.</p>
+        <p class="showcase-detail">Tap any category to drill into the merchants behind it. Every euro accounted for, no transaction-scrolling required.</p>
+      </div>
+    </div>
+
+    <div class="showcase-row fade-up">
+      <div class="showcase-phone"><img src="goals.jpg" alt="Catcher savings goals — Lisbon Trip 42% progress, on track" loading="lazy"></div>
+      <div class="showcase-text">
+        <span class="showcase-tag">Goals you'll actually reach</span>
+        <h3>Save with a <em>specific destination in mind.</em></h3>
+        <p>Set a goal — Lisbon trip, a deposit, a new car — and Catcher tracks every saving you find against it. Verified refunds, cancellations and renegotiations auto-credit toward your goal so you can watch it grow week to week.</p>
+        <p class="showcase-detail">Ask Catcher for a personalised plan: flight prices, daily budget, booking tips, all sourced for your destination and date.</p>
       </div>
     </div>
   </div>
@@ -508,7 +557,7 @@ footer a:hover { color: var(--text); }
     <p class="section-sub fade-up">Catcher isn't just for overcharges. It helps you understand and control your money every day.</p>
     <div class="smart-layout">
       <div class="phone-frame smart-phone fade-up">
-        <img src="smart-money.jpg" alt="Catcher Smart Money — spending breakdown + goals + calendar" loading="lazy">
+        <img src="smart-money-spending.jpg" alt="Catcher Smart Money — spending breakdown with semi-circle donut and category grid" loading="lazy">
       </div>
       <div class="smart-grid">
       <div class="smart-card fade-up">
@@ -541,6 +590,33 @@ footer a:hover { color: var(--text); }
         <h4>Money Calendar</h4>
         <p>See every upcoming charge before it hits. Subscriptions, direct debits, predicted expenses — know what's coming and plan ahead.</p>
       </div>
+      </div>
+    </div>
+
+    <div class="smart-gallery-heading fade-up">
+      <h3>Smart Money, in detail.</h3>
+      <p>Every Smart Money feature works the same way — drill down, get answers, no guesswork.</p>
+    </div>
+    <div class="smart-gallery">
+      <div class="smart-gallery-item fade-up">
+        <div class="showcase-phone"><img src="money-calendar.jpg" alt="Catcher Money Calendar — spending trend chart and weekly fingerprint heatmap" loading="lazy"></div>
+        <h5>Money Calendar</h5>
+        <p>Six-month spending trend with your weekly fingerprint — instantly see which days run hot.</p>
+      </div>
+      <div class="smart-gallery-item fade-up" style="transition-delay:0.1s">
+        <div class="showcase-phone"><img src="spending-targets.jpg" alt="Catcher Spending Targets — cap your categories with monthly limits" loading="lazy"></div>
+        <h5>Spending Targets</h5>
+        <p>Cap every category with a monthly target, link it to a goal, and let Catcher coach you to it.</p>
+      </div>
+      <div class="smart-gallery-item fade-up" style="transition-delay:0.2s">
+        <div class="showcase-phone"><img src="category-detail.jpg" alt="Catcher category drill-down — Dining merchants ranked by spend" loading="lazy"></div>
+        <h5>Category Drill-down</h5>
+        <p>Tap any category to see the exact merchants behind it — sorted by spend, this month only.</p>
+      </div>
+      <div class="smart-gallery-item fade-up" style="transition-delay:0.3s">
+        <div class="showcase-phone"><img src="goal-detail.jpg" alt="Catcher goal detail — Lisbon Trip with personalised AI plan and progress" loading="lazy"></div>
+        <h5>Goal Detail + AI Plan</h5>
+        <p>Ask Catcher for a personalised plan — flight prices, daily budget, booking tips for your destination.</p>
       </div>
     </div>
   </div>
