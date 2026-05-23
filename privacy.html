@@ -64,6 +64,7 @@ nav {
 nav .inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo img { height: 30px; width: auto; }
+.logo-text { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--text); letter-spacing: -0.5px; line-height: 1; margin-bottom: -2px; border: none; }
 nav a.back { color: var(--text-mid); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
 nav a.back:hover { color: var(--text); }
 
@@ -231,7 +232,7 @@ footer.policy-footer a:hover { color: var(--text); }
 
 <nav>
   <div class="inner">
-    <a href="/" class="logo"><img src="/logo.png" alt="Catcher"></a>
+    <a href="/" class="logo"><img src="/logo.png" alt="Catcher"><span class="logo-text">Catcher</span></a>
     <div class="nav-links">
       <a href="/features" class="nav-link">Features</a>
       <a href="/smart-money" class="nav-link">Smart Money</a>
