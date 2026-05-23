@@ -86,10 +86,15 @@ body { line-height: 1.7; font-weight: 400; }
   font-size: 17px; font-weight: 600; color: var(--text);
   margin: 28px 0 12px; letter-spacing: -0.01em;
 }
-.wrap p { color: var(--text-mid); margin-bottom: 16px; font-size: 15px; line-height: 1.7; }
+/* Readability pass — bumped from 15px / text-mid to 16px / text on white
+   so the body content is unambiguously visible against the page bg. Legal
+   pages were rendering with the lighter mid-grey treatment more typical
+   of UI helper-text; for paragraphs of actual law the user needs to read,
+   primary text colour wins. */
+.wrap p { color: var(--text); margin-bottom: 18px; font-size: 16px; line-height: 1.7; }
 .wrap p strong { color: var(--text); font-weight: 600; }
 .wrap ul, .wrap ol { margin: 12px 0 20px 24px; }
-.wrap li { color: var(--text-mid); margin-bottom: 8px; font-size: 15px; line-height: 1.65; }
+.wrap li { color: var(--text); margin-bottom: 8px; font-size: 16px; line-height: 1.65; }
 .wrap li strong { color: var(--text); font-weight: 600; }
 
 .wrap a { color: var(--green-deep); text-decoration: none; border-bottom: 1px solid var(--green-border); transition: border-color 0.15s, color 0.15s; }
