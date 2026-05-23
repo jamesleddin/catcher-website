@@ -231,10 +231,47 @@ footer.policy-footer a:hover { color: var(--text); }
 
 <nav>
   <div class="inner">
-    <a class="logo" href="/"><img src="logo.png" alt="Catcher"></a>
-    <a class="back" href="/">← Back to site</a>
+    <a href="/" class="logo"><img src="/logo.png" alt="Catcher"></a>
+    <div class="nav-links">
+      <a href="/features" class="nav-link">Features</a>
+      <a href="/smart-money" class="nav-link">Smart Money</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/faq" class="nav-link">FAQ</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/#waitlist" class="nav-link nav-cta">Join Waitlist</a>
+    </div>
   </div>
 </nav>
+
+<style>
+/* Multi-page nav styles — local override since this page also keeps the
+   legal-doc body styling above. */
+.nav-links { display: flex; gap: 28px; align-items: center; }
+nav a.nav-link { color: var(--text-mid); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; border: none; }
+nav a.nav-link:hover { color: var(--text); }
+.nav-cta { background: var(--green); color: #fff !important; padding: 9px 20px; border-radius: 10px; font-weight: 600; font-size: 13px !important; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; border: none; }
+.nav-cta:hover { transform: translateY(-1px); background: var(--green-deep); box-shadow: 0 6px 18px rgba(16,185,129,0.25); }
+
+/* Site footer — same structure as the marketing pages. */
+.site-footer { padding: 64px 0 40px; border-top: 1px solid var(--border); background: var(--bg); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.footer-brand img { height: 28px; width: auto; margin-bottom: 14px; opacity: 0.85; }
+.footer-brand p { font-size: 13px; color: var(--text-mid); line-height: 1.6; max-width: 280px; }
+.footer-col h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+.footer-col ul { list-style: none; margin: 0; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: var(--text-mid); text-decoration: none; font-size: 13.5px; transition: color 0.2s; border: none; }
+.footer-col a:hover { color: var(--green-deep); }
+.footer-bottom { max-width: 1100px; margin: 48px auto 0; padding: 24px 24px 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-dim); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+@media (max-width: 880px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .nav-links .nav-link:not(.nav-cta) { display: none; }
+}
+@media (max-width: 540px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
 
 <main class="wrap">
 
@@ -640,78 +677,45 @@ footer.policy-footer a:hover { color: var(--text); }
     </div>
   </section>
 
-  <footer class="policy-footer">
-    © <span id="year"></span> [CATCHER LEGAL ENTITY NAME]. &nbsp;·&nbsp; <a href="/terms">Terms of Service</a> &nbsp;·&nbsp; <a href="/cookies">Cookie Policy</a>
-  </footer>
-
 </main>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="Catcher">
+      <p>The AI financial advocate. Find overcharges, fight back, save money — all from one app.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/smart-money">Smart Money</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:hello@catcher.ie">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Security &amp; Legal</h5>
+      <ul>
+        <li><a href="/security">Security</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Catcher. Built in Ireland. Built for everyone.</div>
+    <div>hello@catcher.ie</div>
+  </div>
+</footer>
 
-// Constellation background — identical to index.html so the two pages
-// share the same ambient visual. 42 floating points, max connection
-// distance 160px, brand-green strokes at low opacity.
-(function(){
-  const canvas = document.getElementById('constellation');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h;
-  const points = [];
-  const COUNT = 42;
-  const MAX_DIST = 160;
-  const GREEN = [16, 185, 129];
-
-  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  for (let i = 0; i < COUNT; i++) {
-    points.push({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-      r: Math.random() * 1.2 + 0.4,
-      pulse: Math.random() * Math.PI * 2,
-      pulseSpeed: 0.004 + Math.random() * 0.008
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    for (const p of points) {
-      p.x += p.vx; p.y += p.vy; p.pulse += p.pulseSpeed;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-    }
-    for (let i = 0; i < points.length; i++) {
-      for (let j = i + 1; j < points.length; j++) {
-        const dx = points[i].x - points[j].x;
-        const dy = points[i].y - points[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MAX_DIST) {
-          const alpha = (1 - dist / MAX_DIST) * 0.08;
-          ctx.beginPath();
-          ctx.moveTo(points[i].x, points[i].y);
-          ctx.lineTo(points[j].x, points[j].y);
-          ctx.strokeStyle = 'rgba(' + GREEN[0] + ',' + GREEN[1] + ',' + GREEN[2] + ',' + alpha + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-    for (const p of points) {
-      const pulseAlpha = 0.18 + Math.sin(p.pulse) * 0.12;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + GREEN[0] + ',' + GREEN[1] + ',' + GREEN[2] + ',' + pulseAlpha + ')';
-      ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
+<script src="/scripts.js"></script>
 </body>
 </html>

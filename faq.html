@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Catcher</title>
+<meta name="description" content="Questions about how Catcher works, bank safety, AI letters, regulators, pricing, disconnect and data deletion. The full, honest answers.">
+<meta property="og:title" content="FAQ — Catcher">
+<meta property="og:description" content="Honest answers about bank safety, AI letters, regulators, pricing, and data deletion.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catcher.ie/faq">
+<meta name="theme-color" content="#10b981">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="constellation"><canvas id="constellation"></canvas></div>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo"><img src="/logo.png" alt="Catcher"></a>
+    <div class="nav-links">
+      <a href="/features" class="nav-link">Features</a>
+      <a href="/smart-money" class="nav-link">Smart Money</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
+      <a href="/faq" class="nav-link active">FAQ</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/#waitlist" class="nav-link nav-cta">Join Waitlist</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-label fade-up">FAQ</div>
+    <h1 class="fade-up">Questions you <em>should</em> ask.</h1>
+    <p class="fade-up">The full, honest answers — not marketing speak. If you have a question that isn't covered here, email <a href="mailto:hello@catcher.ie" style="color:#fff;text-decoration:underline;">hello@catcher.ie</a>.</p>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-list">
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Is my bank data safe? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Catcher connects via TrueLayer, an FCA-authorised Account Information Service Provider operating under PSD2. We only have read-only access — we can never move money. We never see or store your login credentials. All data is encrypted with AES-256-GCM and stored in the EU.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Which banks are supported? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">At launch (Ireland): AIB, Bank of Ireland, Revolut, N26, and Permanent TSB. More banks and credit unions in Ireland coming soon, with additional countries on the roadmap.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">How do the AI letters work? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">When Catcher detects an overcharge, AI drafts a professional letter citing the right regulator — FSPO for financial services, CRU for energy, ComReg for telecoms, CCPC for consumer rights (in Ireland; more regulators added as Catcher expands). It includes competitor quotes when available and pre-fills the provider's email. You review before sending. Always your name, always your control.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">How does pricing work? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Catcher Free includes subscription detection, claim tracking, and one AI letter per month — free forever, no card required. Catcher Pro (€7.99/month or €69.99/year) unlocks unlimited letters across every overcharge type, all Smart Money features, AI-powered goal planning, and multi-account support.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Is Catcher a regulated financial service? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">No. Catcher is an information and advocacy tool, not a regulated financial advisor or credit intermediary. We don't provide financial advice, hold client money, or facilitate transactions. We provide tools and information to help you act on your own decisions. Your bank connection is provided by TrueLayer, which is regulated as an Account Information Service Provider.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I delete my data? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes, at any time. One tap removes everything — your account, transactions, findings, and letters. We disconnect from your bank immediately and revoke all access tokens. GDPR Article 17 — your right to erasure.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">How does flight compensation work? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Catcher scans your bank transactions for airline purchases, then checks if those flights were delayed 3+ hours. Under EU Regulation 261/2004, you may be owed €250–€600 per passenger. Catcher drafts the claim letter with all flight details and legal references — no need for a claims company taking a large cut. Claims are generally valid for up to 6 years under Irish law (other jurisdictions vary).</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Who sees my data? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Your data is processed by five services, each with a signed Data Processing Agreement: TrueLayer (bank connection), Supabase (database, EU hosted), Anthropic (AI classification — your data is pseudonymised first), Stripe (payments), and Sentry (error monitoring — all personal data scrubbed). We never sell your data. We never share it with advertisers. We never will.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">What happens if I disconnect? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">You can disconnect your bank at any time from the app. Catcher immediately revokes the access token — we lose all ability to read your transactions. Your existing findings and claims remain so you don't lose progress on active negotiations. To remove everything, tap "Delete my account" — all data is permanently erased within seconds.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">How is Catcher different from a budgeting app? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Budgeting apps tell you what you spent. Catcher fights to get you money back. Every insight either saves you money, leads to a finding, or reinforces Catcher's role as your advocate. Smart Money helps you understand your spending day-to-day — but the core product is built around recovering money companies are quietly taking from you.</div></div>
+      </div>
+      <div class="faq-item fade-up" onclick="toggleFaq(this)">
+        <div class="faq-q">Will Catcher expand beyond Ireland? <span class="arrow">▾</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Catcher launches in Ireland because we know the regulators, the consumer law, and the bank landscape better than anyone. The same architecture supports any market with Open Banking and named regulators. Additional countries are on the roadmap — sign up for the waitlist and we'll let you know when your country is added.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container">
+    <img src="/logo.png" alt="Catcher" style="height:44px;width:auto;margin-bottom:24px;" class="fade-up">
+    <h2 class="fade-up">Still have questions? <em>Just ask.</em></h2>
+    <p class="fade-up">Email <a href="mailto:hello@catcher.ie" style="color:var(--green-deep);font-weight:500;">hello@catcher.ie</a> — or join the waitlist for launch updates.</p>
+    <form class="hero-form fade-up" onsubmit="handleSubmit(event)" style="max-width:460px;margin:0 auto 14px;">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <button type="submit">Join the Waitlist</button>
+    </form>
+    <p class="form-consent fade-up">
+      By joining, you agree to receive launch updates from Catcher. Unsubscribe anytime. See our <a href="/privacy">Privacy Policy</a>.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="Catcher">
+      <p>The AI financial advocate. Find overcharges, fight back, save money — all from one app.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/smart-money">Smart Money</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:hello@catcher.ie">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Security &amp; Legal</h5>
+      <ul>
+        <li><a href="/security">Security</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="copyright">© 2026 Catcher. Built in Ireland. Built for everyone.</div>
+    <div>hello@catcher.ie</div>
+  </div>
+</footer>
+
+<script src="/scripts.js"></script>
+</body>
+</html>
