@@ -2,3 +2,10 @@
 .DS_Store
 *.zip
 originals/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
