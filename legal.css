@@ -14,11 +14,11 @@ body { line-height: 1.7; font-weight: 400; }
   margin-bottom: 20px;
 }
 .wrap h1 {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: clamp(40px, 6vw, 64px); font-weight: 400; letter-spacing: -1.5px;
   line-height: 1.05; margin-bottom: 16px; color: var(--text);
 }
-.wrap h1 em { color: var(--green-deep); font-style: italic; }
+.wrap h1 em { color: var(--green-deep); font-weight: 800; }
 .subtitle { font-size: 18px; color: var(--text-mid); max-width: 580px; line-height: 1.6; }
 .meta {
   margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border);
@@ -71,7 +71,7 @@ body { line-height: 1.7; font-weight: 400; }
 
 .wrap section { margin-bottom: 56px; scroll-margin-top: 100px; padding: 0; }
 .wrap h2 {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: clamp(26px, 3vw, 34px); font-weight: 400; letter-spacing: -0.8px;
   margin-bottom: 20px;
   border-top: 1px solid var(--border);
